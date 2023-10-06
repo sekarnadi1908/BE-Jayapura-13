@@ -1,27 +1,19 @@
-const express = require("express")
+const express = require("express") // ini perlu
 const cors = require('cors');
-const path = require('path');
+const path = require('path'); //tidak perlu npm install
 const connection = require('./app/model/index')
+
 // init express server and router
 const app = express();
 const mainRouter = require('./app/routes');
 require('dotenv').config()
 
-//Praktik RevoU
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.static('Praktik RevoU'));
-
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.json()); // supaya express bisa response json
+app.use(express.urlencoded({ extended: false })); // supaya express bisa menerima body
 
-//http router
+// http router
 app.use("/", mainRouter);
-
-app.get('/', (req,res) => {
-    res.sendFile('Praktik RevoU/index.html');
-})
 
 const port = 3000
 app.listen(port, function(){
@@ -35,24 +27,3 @@ app.listen(port, function(){
         process.exit()
     })
 })
-
-
-
-// //simple
-// const express = require("express");
-// const port = process.env.PORT || 3003
-
-// const index = express();
-
-// //Praktik RevoU
-// index.use(express.json());
-// index.use(express.urlencoded());
-// index.use(express.static('Praktik RevoU'));
-
-// index.get('/', (req,res) => {
-//     res.sendFile('Praktik RevoU/index.html');
-// })
-
-// index.listen(port, () => {
-//     console.log('Server running on localhost:${port}');
-// })
