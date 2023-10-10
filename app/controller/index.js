@@ -1,9 +1,8 @@
-const GambarDatabase = require('../model/gambar');
 const Game = require('../model/game');
 
 async function gambar(req, res){
     try{
-        const gambar = await GambarDatabase.findOne();
+        const gambar = await Game.findAll();
         res.json(gambar);
     } catch (err){
         res.status(500).json({error: err.message});
